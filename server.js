@@ -15,7 +15,8 @@ app.use(express.urlencoded({extended : false}));
 app.use('/api/sources', require('./routes/sourceRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/articles', require('./routes/articleRoutes'));
-
+app.use('/api/lists', require('./routes/listRoutes'));
+app.use('/api/items', require('./routes/itemRoutes'));
 
 
 app.use(errorHandler);

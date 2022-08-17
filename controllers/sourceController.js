@@ -17,7 +17,6 @@ const getSources = asyncHandler(async (req, res) => {
 // @desc    Set a source
 // @route   POST /api/sources
 // @access  Private
-//TODO: Update sourceSchema to mandatory user field and add user field
 const setSource = asyncHandler(async (req, res) => {
     
     if(!(req.body.title && req.body.language))

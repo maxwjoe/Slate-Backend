@@ -53,7 +53,7 @@ const updateArticle = asyncHandler(async (req, res) => {
 
     const article = await Article.findById(req.params.id);
 
-    if(!Article)
+    if(!article)
     {
         res.status(400);
         throw new Error("Article not found")
@@ -88,7 +88,7 @@ const deleteArticle = asyncHandler(async (req, res) => {
     if(!article)
         {
             res.status(400);
-            throw new Error("Source not found");
+            throw new Error("Article not found");
         }
 
     const user = await User.findById(req.user.id);
