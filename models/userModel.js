@@ -7,11 +7,16 @@ const userSchema = mongoose.Schema({
     },
     email : {
         type : String,
-        required : [true, 'Users must have an email']
+        required : [true, 'Users must have an email'],
+        unique : true
     },
     profileImage : {
         type : String,
         required : false
+    },
+    password : {
+        type : String,
+        required : [true, 'Users must have a password']
     }
 }, {
     timestamps : true
