@@ -6,6 +6,11 @@ const itemSchema = mongoose.Schema({
         required : true,
         ref : 'List'
     },
+    user : {
+        type : mongoose.Schema.Types.ObjectId,
+        required : true,
+        ref : 'User'
+    },
     title : {
         type : String,
         required : [true, 'Items must have a title']
