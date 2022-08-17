@@ -13,7 +13,7 @@ const getLists = asyncHandler(async (req, res) => {
 })
 
 // @desc    Get Lists by Source
-// @route   GET /api/lists
+// @route   GET /api/lists/:src
 // @access  Private
 const getListsBySource = asyncHandler(async (req, res) => {
     const lists = await List.find({source : req.params.src, user : req.user.id});
