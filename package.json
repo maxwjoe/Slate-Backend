@@ -1,5 +1,30 @@
 {
+  "name": "slate",
+  "version": "1.0.0",
+  "description": "Backend for Slate Language Learning Application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxwjoe/Slate.git"
+  },
+  "author": "Joel Maxwell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxwjoe/Slate/issues"
+  },
+  "homepage": "https://github.com/maxwjoe/Slate#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }

@@ -1,2 +1,0 @@
-# Slate
-Language Learning Companion
