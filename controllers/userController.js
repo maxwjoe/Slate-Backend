@@ -68,7 +68,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
     if(!user)
     {
-        throw new Error("User does not exist")
+        res.status(400);
+        throw new Error("User does not exist");
     }
 
     // Password Check
