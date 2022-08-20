@@ -36,6 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const newUser = await User.create({
         username,
         email,
+        profileImage : "None",
         password : hashedPassword
     })
 
@@ -45,7 +46,8 @@ const registerUser = asyncHandler(async (req, res) => {
             _id : newUser._id,
             username : newUser.username,
             email : newUser.email,
-            token : generateToken(newUser._id)
+            token : generateToken(newUser._id),
+            profileImage : newUser.profileImage
         })
     } else {
         res.status(400);
@@ -64,6 +66,11 @@ const loginUser = asyncHandler(async (req, res) => {
     // get user
     const user = await User.findOne({email});
 
+    if(!user)
+    {
+        throw new Error("User does not exist")
+    }
+
     // Password Check
     const passwordCheck = await bcrypt.compare(password, user.password);
 
@@ -73,6 +80,7 @@ const loginUser = asyncHandler(async (req, res) => {
             _id : user._id,
             name : user.name,
             email : user.email,
+            profileImage : user?.profileImage || 'None',
             token : generateToken(user._id)
         })
     } else {
