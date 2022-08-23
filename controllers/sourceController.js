@@ -48,15 +48,9 @@ const updateSource = asyncHandler(async (req, res) => {
         throw new Error("Source not found");
     }
 
-    const user = await User.findById(req.user.id);
+    const user_id = req.user.id;
 
-    if(!user)
-    {
-        res.status(401);
-        throw new Error("User not found");
-    }
-
-    if(source.user.toString() !== user.id)
+    if(source.user.toString() !== user_id)
     {
         res.status(401);
         throw new Error("User not authorized");
