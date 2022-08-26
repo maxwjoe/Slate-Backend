@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 const User = require('../models/userModel');
 const List = require('../models/listModel');
+const Item = require('../models/itemModel')
 
 // @desc    Get Lists
 // @route   GET /api/lists
@@ -79,10 +80,10 @@ const deleteList = asyncHandler(async (req, res) => {
     const list = await List.findById(req.params.id);
 
     if(!list)
-        {
-            res.status(400);
-            throw new Error("List not found");
-        }
+    {
+        res.status(400);
+        throw new Error("List not found");
+    }
 
     const user = await User.findById(req.user.id);
 
@@ -97,6 +98,8 @@ const deleteList = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("User not authorized");
     }
+
+    await Item.deleteMany({list : list._id});
 
     await list.remove();
     res.status(200).json({id : req.params.id});

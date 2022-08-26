@@ -3,6 +3,9 @@ const asyncHandler = require("express-async-handler");
 
 const Source = require('../models/sourceModel');
 const User = require('../models/userModel')
+const List = require('../models/listModel')
+const Article = require('../models/articleModel');
+const Item = require('../models/itemModel')
 
 // @desc    Get Sources
 // @route   GET /api/sources
@@ -66,26 +69,43 @@ const updateSource = asyncHandler(async (req, res) => {
 // @access  Private
 const deleteSource = asyncHandler(async (req, res) => {
     
+    // Get source, all lists, articles and items
     const source = await Source.findById(req.params.id);
 
+    
     if(!source)
-        {
+    {
             res.status(400);
             throw new Error("Source not found");
-        }
-
-        const user = await User.findById(req.user.id);
-
+    }
+        
+    const user = await User.findById(req.user.id);
+    
     if(!user)
     {
         res.status(401);
         throw new Error("User not found");
     }
-
+    
     if(source.user.toString() !== user.id)
     {
         res.status(401);
         throw new Error("User not authorized");
+    }
+    
+    // Find all the lists
+    const lists = await List.find({source : source._id});
+
+    // Delete all the lists
+    await List.deleteMany({source : source._id});
+
+    // Delete all the articles
+    await Article.deleteMany({source : source._id});
+    
+    // Delete all the items in each list that was found
+    for(let i = 0 ; lists && i < lists.length; i++)
+    {
+        await Item.deleteMany({list : lists[i]._id})
     }
 
     await source.remove();
