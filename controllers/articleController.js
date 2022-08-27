@@ -40,7 +40,7 @@ const setArticle = asyncHandler(async (req, res) => {
         source : req.body.source,
         user : req.user.id,
         title : req.body.title,
-        content : req.body.content
+        content : req.body.content,
     })
 
     res.status(201).json(newArticle);
