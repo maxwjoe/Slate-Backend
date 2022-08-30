@@ -10,13 +10,18 @@ const User = require("../models/userModel");
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
     
-    const {username, email, password} = req.body;
+    const {username, email, password, profileImage} = req.body;
 
     // Validate body parameters 
     if(!(username && email && password))
     {
         res.status(400);
         throw new Error("Please add all fields");
+    }
+
+    if(!profileImage){
+        res.status(400);
+        throw new Error("There was an error");
     }
 
     // Check if the user already exists
@@ -36,8 +41,9 @@ const registerUser = asyncHandler(async (req, res) => {
     const newUser = await User.create({
         username,
         email,
-        profileImage : "None",
-        password : hashedPassword
+        profileImage,
+        password : hashedPassword,
+        OAuthID : req.body?.OAuthID ? req.body?.OAuthID : "None",
     })
 
     if(newUser)
@@ -79,7 +85,7 @@ const loginUser = asyncHandler(async (req, res) => {
     {
         res.status(200).json({
             _id : user._id,
-            name : user.name,
+            username : user.username,
             email : user.email,
             profileImage : user?.profileImage || 'None',
             token : generateToken(user._id)
@@ -104,6 +110,26 @@ const getCurrUser = asyncHandler(async (req, res) => {
     })
 })
 
+// @desc    Get user data
+// @route   GET /api/users/current
+// @access  Private
+const updateUser = asyncHandler(async (req, res) => {
+    
+    const curUser = await User.findByIdAndUpdate(req.user.id, req.body, {new : true}).lean();
+
+    if(!curUser) {
+        res.status(500);
+        throw new Error("Failed to update user");
+    }
+
+    res.status(200);
+    res.json({
+        ...curUser,
+        token : generateToken(curUser._id)
+    });
+})
+
+
 
 // generateToken : Generates a JWT
 const generateToken = (id) => {
@@ -116,5 +142,6 @@ const generateToken = (id) => {
 module.exports = {
     registerUser,
     loginUser,
+    updateUser,
     getCurrUser
 }

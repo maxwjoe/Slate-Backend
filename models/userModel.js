@@ -16,7 +16,11 @@ const userSchema = mongoose.Schema({
     },
     password : {
         type : String,
-        required : [true, 'Users must have a password']
+        required : false,
+    },
+    OAuthID : {
+        type : String,
+        required : false,
     }
 }, {
     timestamps : true
