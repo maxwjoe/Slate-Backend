@@ -21,7 +21,15 @@ const userSchema = mongoose.Schema({
     OAuthID : {
         type : String,
         required : false,
-    }
+    },
+    themeAccent : {
+        type : String,
+        required : false,
+    },
+    preferredTheme : {
+        type : String,
+        required : false,
+    },
 }, {
     timestamps : true
 })

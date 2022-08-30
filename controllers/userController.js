@@ -44,6 +44,8 @@ const registerUser = asyncHandler(async (req, res) => {
         profileImage,
         password : hashedPassword,
         OAuthID : req.body?.OAuthID ? req.body?.OAuthID : "None",
+        themeAccent : "#d94c68",
+        preferredTheme : "dark",
     })
 
     if(newUser)
@@ -53,7 +55,10 @@ const registerUser = asyncHandler(async (req, res) => {
             username : newUser.username,
             email : newUser.email,
             token : generateToken(newUser._id),
-            profileImage : newUser.profileImage
+            profileImage : newUser.profileImage,
+            OAuthID : newUser.OAuthID,
+            themeAccent : newUser.themeAccent,
+            preferredTheme : newUser.preferredTheme,
         })
     } else {
         res.status(400);
@@ -88,7 +93,10 @@ const loginUser = asyncHandler(async (req, res) => {
             username : user.username,
             email : user.email,
             profileImage : user?.profileImage || 'None',
-            token : generateToken(user._id)
+            token : generateToken(user._id),
+            OAuthID : user.OAuthID,
+            preferredTheme : user.preferredTheme,
+            themeAccent : user.themeAccent,
         })
     } else {
         res.status(400);
