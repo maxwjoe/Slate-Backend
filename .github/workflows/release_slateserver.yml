@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'slateserver'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A42A8290AF92420FAD9C8CC34FBC4E79 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F45C7B35532646898A9669B115B2BA42 }}
           package: .
