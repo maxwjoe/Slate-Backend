@@ -9,7 +9,7 @@ var cors = require('cors');
 connectDB();
 const app = express();
 const corsOptions ={
-    origin:'http://127.0.0.1:3000', 
+    origin:'*', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
