@@ -10,6 +10,7 @@ connectDB();
 const app = express();
 const corsOptions ={
     origin:'*', 
+    methods: ["PUT", "POST", "GET", "DELETE", "OPTIONS"],
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
