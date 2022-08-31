@@ -8,11 +8,16 @@ var cors = require('cors');
 // --- Setup ---
 connectDB();
 const app = express();
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
 
 // --- Middleware ---
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use('/api/sources', require('./routes/sourceRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
