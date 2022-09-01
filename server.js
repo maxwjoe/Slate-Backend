@@ -9,16 +9,16 @@ var cors = require('cors');
 connectDB();
 const app = express();
 const corsOptions ={
-    origin:'*', 
+    origin:true, 
     methods: ["PUT", "POST", "GET", "DELETE", "OPTIONS"],
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
 
 // --- Middleware ---
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
-app.use(cors(corsOptions));
 
 app.use('/api/sources', require('./routes/sourceRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
