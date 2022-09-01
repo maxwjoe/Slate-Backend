@@ -3,30 +3,38 @@ const dotenv = require('dotenv').config();
 const port = process.env.PORT;
 const {errorHandler} = require("./middleware/errorMiddleware")
 const connectDB = require('./config/db');
+const cors = require('cors');
 //
 // --- Setup ---
 connectDB();
 const app = express();
+const corsOptions = {
+    origin : "*",
+    methods : ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
+    credentials : true,
+}
+
 
 // --- Middleware ---
+app.use(cors(corsOptions));
 
-//Cors Configuration - Start
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested, Content-Type, Accept Authorization"
-    )
-    if (req.method === "OPTIONS") {
-      res.header(
-        "Access-Control-Allow-Methods",
-        "POST, PUT, PATCH, GET, DELETE"
-      )
-      return res.status(200).json({})
-    }
-    next()
-  })
-  //Cors Configuration - End
+// //Cors Configuration - Start
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*")
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "Origin, X-Requested, Content-Type, Accept Authorization"
+//     )
+//     if (req.method === "OPTIONS") {
+//       res.header(
+//         "Access-Control-Allow-Methods",
+//         "POST, PUT, PATCH, GET, DELETE"
+//       )
+//       return res.status(200).json({})
+//     }
+//     next()
+//   })
+//   //Cors Configuration - End
 
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
