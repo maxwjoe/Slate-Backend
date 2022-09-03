@@ -4,7 +4,7 @@ Slate is a tool designed to assist you in learning a foreign language. It allows
 </p>
 
 <p>
-The front-end repo can be found here : https://github.com/maxwjoe/Slate
+The frontend repo can be found here : https://github.com/maxwjoe/Slate
 </p>
 
 <hr/>
