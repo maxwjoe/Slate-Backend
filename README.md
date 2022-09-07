@@ -11,7 +11,7 @@ The frontend repo can be found here : https://github.com/maxwjoe/Slate
 
 <h3>Tech Stack (MERN)</h3>
 <h4>Frontend UI : React (Typescript + TailwindCSS)</h4>
-<h4>Backend Server : ExpressJS</h4>
+<h4>Backend Server : Node and Express</h4>
 <h4>Database : MongoDB</h4>
 
 
