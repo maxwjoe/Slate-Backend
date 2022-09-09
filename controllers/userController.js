@@ -46,6 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
         OAuthID : req.body?.OAuthID ? req.body?.OAuthID : "None",
         themeAccent : "#d94c68",
         preferredTheme : "dark",
+        isDemo : req.body?.isDemo == true ? true : false,
     })
 
     if(newUser)

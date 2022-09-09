@@ -30,6 +30,10 @@ const userSchema = mongoose.Schema({
         type : String,
         required : false,
     },
+    isDemo : {
+        type : Boolean,
+        required : false,
+    }
 }, {
     timestamps : true
 })
